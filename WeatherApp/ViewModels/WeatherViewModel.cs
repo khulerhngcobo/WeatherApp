@@ -200,7 +200,7 @@ namespace WeatherApp.ViewModels
                 {
 
                     var title = "Location Permission";
-                    var question = "To get your current city the location permission is required. Please go into Settings and turn on Location for the app.";
+                    var question = "To get your current location permission is required. Please go into Settings and turn on Location for the app.";
                     var positive = "Settings";
                     var negative = "Maybe Later";
                     var task = Application.Current?.MainPage?.DisplayAlert(title, question, positive, negative);
@@ -225,15 +225,15 @@ namespace WeatherApp.ViewModels
                 if (newStatus.ContainsKey(Permission.Location) && newStatus[Permission.Location] != PermissionStatus.Granted)
                 {
                     var title = "Location Permission";
-                    var question = "To get your current city the location permission is required.";
+                    var question = "To get your current location permission is required.";
                     var positive = "Settings";
                     var negative = "Maybe Later";
-                    var task = await Application.Current.MainPage.DisplayAlert(title, question, positive, negative);
-                 //   if (task == null)
-                 //       return false;
+                    var task = Application.Current.MainPage.DisplayAlert(title, question, positive, negative);
+                    if (task == null)
+                        return false;
 
-                   // var result = await task;
-                    if (task)
+                    var result = await task;
+                    if (result)
                     {
                         CrossPermissions.Current.OpenAppSettings();
                     }
